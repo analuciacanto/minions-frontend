@@ -1,0 +1,28 @@
+.page_layout_purchase {
+  margin: 5% 25% 2% 25%;
+  font-size: 1vw;
+
+  .minion_image {
+    background-size: cover;
+    height: 20vw;
+  }
+
+  .minion_name {
+    margin: 1vw 0 0 5vw;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font: normal normal bold 4em Segoe UI;
+  }
+
+  .minion_description {
+    margin: 1vw 0 0 5vw;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font: normal normal 2em Segoe UI;
+    width: 25vw;
+  }
+
+  .minion_price {
+    font: normal normal 4em Segoe UI;
+    margin: 1vw 0 5vw 5vw;
+    color: #496888;
+  }
+}

@@ -3,18 +3,21 @@
     "id": 0,
     "name": "Minion músico",
     "description": "Toca Ukulele, guitarra, violão e baixo. Faz a alegria da galera!",
+    "price": "99,00",
     "minion_image": "https://www.imagemhost.com.br/images/2021/03/22/bob-the-minion-stuart-the-minion-dave-the-minion-agnes-wallpaper-minions-png-cb01b841de78bb0243ab306407c2f74f.png"
   },
   {
     "id": 1,
     "name": "Minion bobão",
     "description": "Conta as melhores piadas para divertir a família e a criançada.",
+    "price": "89,00",
     "minion_image": "https://www.imagemhost.com.br/images/2021/03/22/agnes-stuart-the-minion-bob-the-minion-dave-the-minion-kevin-the-minion-minions-bebe-2086abd5cc7b39780836fe69dec59d022x.png"
   },
   {
     "id": 2,
     "name": "Minion estudioso",
     "description": "Fala todas as línguas e organiza as contas da casa.",
+    "price": "109,00",
     "minion_image": "https://www.imagemhost.com.br/images/2021/03/22/kevin-the-minion-dave-the-minion-minions-clip-art-minions-png-943db57e31b29fff730c60e503081f042x.png"
   }
 ]
