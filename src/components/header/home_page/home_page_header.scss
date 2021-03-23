@@ -1,0 +1,18 @@
+.header_home_page {
+  font-size: 1vw;
+  background: url(./../../../assets/images/header.png);
+
+  background-size: cover;
+  width: 98vw;
+  height: 60vw;
+  display: flex;
+  flex-direction: row-reverse;
+  //position: absolute;
+
+  .header_title {
+    font: bold 8em Segoe UI;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 10vw;
+    width: 50vw;
+  }
+}

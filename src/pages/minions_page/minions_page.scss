@@ -1,0 +1,68 @@
+//Desktop layout
+@media screen and (min-width: 800px) {
+  .page_layout {
+    font-size: 1vw;
+
+    .minions_grid {
+      display: grid;
+      grid-template-columns: 33% 33% 33%;
+      margin: 5% 10% 5% 10%;
+
+      .minion_card {
+        padding: 3vw;
+
+        .minion_image {
+          background-size: cover;
+          height: 18vw;
+        }
+
+        .minion_name {
+          padding-top: 1vw;
+          font: bold 2em Segoe UI;
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .minion_description {
+          font: normal 1.3em Segoe UI;
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+          padding-bottom: 1vw;
+        }
+      }
+    }
+  }
+}
+
+//Mobile layout
+@media screen and (max-width: 800px) {
+  .page_layout {
+    font-size: 3vw;
+
+    .minions_grid {
+      display: flex;
+      flex-direction: column;
+      margin: 10%;
+
+      .minion_card {
+        margin-bottom: 10%;
+        padding: 3vw;
+
+        .minion_image {
+          background-size: cover;
+          height: 18vw;
+        }
+
+        .minion_name {
+          padding-top: 1vw;
+          font: bold 2em Segoe UI;
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .minion_description {
+          font: normal 1.3em Segoe UI;
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+          padding-bottom: 1vw;
+        }
+      }
+    }
+  }
+}
