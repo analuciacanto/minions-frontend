@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import {
-  BrowserRouter as Router,
-  useHistory,
-  useParams,
-} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import data from "./minions.json";
 import "./minions_grid.scss";
 
 const MinionsGrid = () => {
-  const [minions, setMinions] = useState(data);
+  const [minions] = useState(data);
   let history = useHistory();
 
   const navigate = (item) => {

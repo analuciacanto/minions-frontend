@@ -6,7 +6,6 @@ import { s3Upload } from "../../../libs/awsLib";
 import { API } from "aws-amplify";
 
 const MinionsRegisterForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
