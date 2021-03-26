@@ -2,32 +2,26 @@ import React, { useState, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { s3Upload } from "../../../libs/awsLib";
 import { API } from "aws-amplify";
 
 const MinionsRegisterForm = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [imageURL, serImageURL] = useState("");
   const [price, setPrice] = useState("");
-  const file = useRef(null);
-
-  function handleFileChange(event) {
-    file.current = event.target.files[0];
-  }
 
   async function handleSubmit(event) {
     event.preventDefault();
     console.log("Começamos");
 
     try {
-      const attachment = file.current ? await s3Upload(file.current) : null;
-      await createMinion({ name, description, price, attachment });
+      await createMinion({ name, description, price, imageURL });
       console.log("Foi");
     } catch (e) {
       console.log(e);
     }
 
-    function createMinion(name, description, price, attachment) {
+    function createMinion(name, description, price, imageURL) {
       return API.post("minions", "/createMinions", {
         body: {
           name: name,
@@ -70,7 +64,7 @@ const MinionsRegisterForm = () => {
         </Col>
         <Col xs={8}>
           <Form.Group controlId="file">
-            <Form.Control onChange={handleFileChange} type="file" />
+            <Form.Control  type="file" />
           </Form.Group>
         </Col>
       </Form.Row>
