@@ -1,35 +1,47 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { API } from "aws-amplify";
+import { useHistory } from "react-router-dom";
 
 const MinionsRegisterForm = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [imageURL, serImageURL] = useState("");
+  const [imageURL, setImageURL] = useState("");
   const [price, setPrice] = useState("");
+  const [isLoading, setLoading] = useState(false);
+
+  let history = useHistory();
+
+  const navigate = () => {
+    history.push({
+      pathname: "/sucesso",
+    });
+  };
 
   async function handleSubmit(event) {
+    setLoading(true);
     event.preventDefault();
-    console.log("Começamos");
 
     try {
-      await createMinion({ name, description, price, imageURL });
-      console.log("Foi");
+      await createMinion();
+      navigate();
     } catch (e) {
       console.log(e);
     }
 
-    function createMinion(name, description, price, imageURL) {
+    function createMinion() {
       return API.post("minions", "/createMinions", {
         body: {
           name: name,
           description: description,
           price: price,
+          image: imageURL,
         },
       });
     }
+    setLoading(false);
   }
 
   return (
@@ -64,12 +76,17 @@ const MinionsRegisterForm = () => {
         </Col>
         <Col xs={8}>
           <Form.Group controlId="file">
-            <Form.Control  type="file" />
+            <Form.Control
+              type="fiile"
+              placeholder="URL da imagem"
+              value={imageURL}
+              onChange={(e) => setImageURL(e.target.value)}
+            />
           </Form.Group>
         </Col>
       </Form.Row>
       <Form.Row>
-        <Button variant="secondary" type="submit">
+        <Button variant="secondary" type="submit" disabled={isLoading}>
           Cadastrar
         </Button>
       </Form.Row>

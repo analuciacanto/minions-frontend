@@ -1,4 +1,4 @@
-import {  React, useState, useLayoutEffect } from "react";
+import { React, useState, useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { API } from "aws-amplify";
 import "./minions_purchase_page.scss";
+import { useHistory } from "react-router-dom";
 
 const MinionsPurchasePage = () => {
   const location = useLocation();
@@ -16,10 +17,16 @@ const MinionsPurchasePage = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
+  const [isLoading, setLoading] = useState(false);
+  let history = useHistory();
+
+  const navigate = () => {
+    history.push({
+      pathname: "/sucesso",
+    });
+  };
 
   useLayoutEffect(() => {
-    console.log(location.param);
-
     setMinion({
       data: location.param,
     });
@@ -27,15 +34,14 @@ const MinionsPurchasePage = () => {
     setRender(true);
   }, [location]);
 
-
   async function handleSubmit(event) {
+    setLoading(true);
     event.preventDefault();
-    console.log("Começamos");
 
     try {
-     // await createPurchase();
+      await createPurchase();
       await sendMail();
-      console.log("Foi");
+      navigate();
     } catch (e) {
       console.log(e);
     }
@@ -51,71 +57,72 @@ const MinionsPurchasePage = () => {
         },
       });
     }
+    setLoading(false);
   }
+
   function sendMail() {
-    return API.post("minions", "/sendMail", {
-    });
-   }
+    return API.post("minions", "/sendMail", {});
+  }
 
   return (
     <div className="page_layout_purchase">
       {render && (
         <div>
           <Row>
-        <Image className="minion_image" src={minion.data.minion_image} />
-        <div>
-          <div className="minion_name">{minion.data.name}</div>
-          <div className="minion_description">
-            {minion.data.description}
-          </div>
-          <div className="minion_price">{"R$:" + minion.data.price}</div>
+            <Image className="minion_image" src={minion.data.image} />
+            <div>
+              <div className="minion_name">{minion.data.name}</div>
+              <div className="minion_description">
+                {minion.data.description}
+              </div>
+              <div className="minion_price">{"R$:" + minion.data.price}</div>
+            </div>
+          </Row>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formName">
+              <Form.Control
+                type="name"
+                placeholder="Nome"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formEmail">
+              <Form.Control
+                placeholder="E-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Row>
+              <Col xs={6}>
+                <Form.Group controlId="formPhone">
+                  <Form.Control
+                    type="phone"
+                    placeholder="Telefone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+              <Col xs={6}>
+                <Form.Group controlId="formAmount">
+                  <Form.Control
+                    type="amount"
+                    placeholder="Quantidade"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Form.Row>
+            <Form.Row>
+              <Button variant="secondary" type="submit" disabled={isLoading}>
+                Reservar
+              </Button>
+            </Form.Row>
+          </Form>
         </div>
-      </Row>
-      <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formName">
-        <Form.Control
-          type="name"
-          placeholder="Nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group controlId="formEmail">
-        <Form.Control
-          placeholder="E-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Row>
-        <Col xs={6}>
-          <Form.Group controlId="formPhone">
-            <Form.Control
-              type="phone"
-              placeholder="Telefone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </Form.Group>
-        </Col>
-        <Col xs={6}>
-          <Form.Group controlId="formAmount">
-            <Form.Control
-              type="amount"
-              placeholder="Quantidade"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-          </Form.Group>
-        </Col>
-      </Form.Row>
-      <Form.Row>
-        <Button variant="secondary" type="submit">
-          Reservar
-        </Button>
-      </Form.Row>
-    </Form>
-          </div>
       )}
     </div>
   );

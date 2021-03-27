@@ -1,3 +1,9 @@
+.button {
+  padding-top: 1vw;
+  padding-right: 2vw;
+  display: flex;
+  flex-direction: row-reverse;
+}
 .header_home_page {
   font-size: 1vw;
   background: url(./../../../assets/images/header.png);
